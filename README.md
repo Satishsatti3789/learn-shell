@@ -34,6 +34,8 @@ Syntax: echo "Hello\tHi"
 \e - New color
 Syntax: echo -e "\e[COL-CODEmInut"
 Example: echo -e "\e[31mHelloSatish"
+
+-n : To disable new lines
 ```
 To reset the color : ```echo -e "\e[0m"```
 
@@ -59,78 +61,93 @@ m: This character signifies that the sequence is setting text attributes, such a
               Magenta      35      45
               Cyan         36      46
               White        37      47
--n : To disable new lines
-Redirectors
-Keyboard Input <--- File
-Terminal Output <--- File
-Input Redirector  **STADIN**  <
-Output Redirector **STDOUT**  >
-STDOUT 1> OR >
-STDERR 2>
-Output and error : &> or
-2>&1 append the output or 1>&2 
-Redirects multiple lines of input to a command until a specified delimiter is reached.
+
+## Redirectors
+##### Keyboard Input <--- File
+##### Terminal Output <--- File
+##### Input Redirector  **STADIN**  ```<```
+##### Output Redirector **STDOUT**  ```>```
+##### STDOUT ```1>``` OR STDERR ```2>```
+##### Output and error : ```&>``` or ```2>&1``` append the output or ```1>&2 ```
+**Redirects multiple lines of input to a command until a specified delimiter is reached.**
+```
 cat << EOF
 This is line 1
 This is line 2
 EOF
-Usage: Redirects a string as input to a command.
-grep "hello" <<< "hello world"
-This command redirects both standard output and standard error to output.txt.
-command > output.txt 2>&1 
-Sometimes we need the output to be printed on screen and save it in a file.
+```
+**Usage: Redirects a string as input to a command.**
+```grep "hello" <<< "hello world"```
+
+**This command redirects both standard output and standard error to output.txt**
+```command > output.txt 2>&1 ```
+**Sometimes we need the output to be printed on screen and save it in a file.**
+```
 tee 
 ls | tee out
 ls | tee -a out : append
+```
+```>/dev/null``` OR ```>/dev/null 2>&1``` : **trash, it takes the input and it nullifies, character special file.**
+`
+**NOTE:** Main disadvantage of a shell is if it fails one command it will never stop. It will execute the next command.
 
->/dev/null : trash, it takes the input and it nullifies, character special file.
->/dev/null 2>&1
-Main disadvantage of a shell is if it fails one command it will never stop. It will execute the next command.
+## Exit status
 
-Exit status
-Ranges from 0-255
-0  - successful 
-1-255 : partial/not successful 
-1 - input errors
-2 - command error
-126 - permission denied error
-127 - command not found
-128 + n kill signals
-n : kill signal number
+Ranges from **0-255**
+**0**  - successful 
+**1-255** : partial/not successful 
+**1** - input errors
+**2** - command error
+**126** - permission denied error
+**127** - command not found
+**128** + n kill signals
+**n** : kill signal number
 ? Is a variable
 We access variables in the shell with dollar $?
 
-Pipes
+## Pipes
 Allows us to combine 2 commands
-com1 | com2
+```com1 | com2```
 Com1 standard output is converted to standard input to com2
-com1 > out && com2 < out same as com1 | com1
-Cat /etc/passwd | grep root same as  cat /etc/passwd >out, grep root < out
+```com1 > out && com2 < out``` same as ```com1 | com1```
+```Cat /etc/passwd | grep root``` same as  ```cat /etc/passwd >out, grep root < out```
 
-Communication 
+## Communication 
+```
 mail -s hell username@localhost
 mail :  command to check mail
-wall : command is used to send a msg to all users not to a single user.
-wall ‘good morning to everyone’
-mutt command is used to send a mail along with an attachment.
+```
+```wall :``` command is used to send a msg to all users not to a single user.
+```wall ‘good morning to everyone’```
+```mutt``` command is used to send a mail along with an attachment.
 
-Quotes
+## Quotes
 We have to disable the speciality of
- special characters 
+**special characters**
+
 Backslash
 Single quotes
 Double quotes
-example: echo * and echo /*
-in single quotes all characters treated as normal characters
-echo ‘* * *’
-command quotes ``
-Double quotes allows us to use 
-$ : access variables (\$)
+
+```example: echo * and echo /*```
+
+**Note:** in single quotes all characters treated as normal characters
+
+```echo ‘* * *’```
+
+##### command quotes ``
+**Double quotes allow us to use**
+``$``` : access variables (\$)
+```
 echo hello \$USER
-` : Execute commands (\`)
-echo `date`
+```
+``` ` ```: Execute commands (\`)
+``` echo `date` ```
+
 This above 2 characters treated as special in double quotes remaining all are treated as normal.
+
 we can combine double and single quotes any way we can use.
+
 Text filters 
 Line based
 head
